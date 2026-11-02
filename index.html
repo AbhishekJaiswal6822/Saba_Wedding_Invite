@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saba & Arbaz – Royal Wedding Invitation</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -36,7 +37,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&family=Scheherazade+New:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -47,67 +50,91 @@
         *::after {
             box-sizing: border-box;
         }
+
         html {
             scroll-padding-top: 4.5rem;
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
         }
+
         body {
             background-color: #F3E5D0;
             color: #382319;
             font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
         }
+
         img,
         svg,
         video {
             max-width: 100%;
         }
+
         section[id] {
             scroll-margin-top: 4.5rem;
         }
+
         .bg-parchment {
             background-color: #F3E5D0;
-            background-image: radial-gradient(circle, rgba(198,161,91,0.08) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(198, 161, 91, 0.08) 1px, transparent 1px);
             background-size: 24px 24px;
         }
+
         .gold-border {
             border: 2px solid #C6A15B;
         }
+
         .gold-box-shadow {
             box-shadow: 0 10px 30px -5px rgba(88, 14, 32, 0.25), 0 0 15px rgba(198, 161, 91, 0.3);
         }
+
         .blessing-card {
             background:
                 radial-gradient(ellipse at 50% 0%, rgba(220, 193, 138, 0.2), transparent 55%),
                 linear-gradient(145deg, #fffaf1, #f3e5d0);
         }
+
         .blessing-glow {
             animation: blessingGlow 4s ease-in-out infinite;
         }
+
         @keyframes blessingGlow {
-            0%, 100% { opacity: 0.45; transform: scale(0.96); }
-            50% { opacity: 0.85; transform: scale(1.04); }
+
+            0%,
+            100% {
+                opacity: 0.45;
+                transform: scale(0.96);
+            }
+
+            50% {
+                opacity: 0.85;
+                transform: scale(1.04);
+            }
         }
+
         #scratchCanvas {
             touch-action: none;
             transition: opacity 700ms ease, visibility 700ms ease;
         }
+
         #scratchCanvas.is-revealed {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
+
         #audioPlayer {
             bottom: 1rem;
             right: 1rem;
             bottom: max(1rem, env(safe-area-inset-bottom));
             right: max(1rem, env(safe-area-inset-right));
         }
+
         #audioToggleBtn {
             min-width: 44px;
             min-height: 44px;
         }
+
         #envelopeOverlay {
             overflow-y: auto;
             overscroll-behavior: contain;
@@ -116,48 +143,59 @@
             padding-top: max(1rem, env(safe-area-inset-top));
             padding-bottom: max(1rem, env(safe-area-inset-bottom));
         }
-        #envelopeOverlay > div {
+
+        #envelopeOverlay>div {
             max-height: calc(100vh - 2rem);
             overflow-y: auto;
             overscroll-behavior: contain;
         }
+
         #home {
             min-height: 90vh;
             padding-block: clamp(1.5rem, 5vh, 2rem);
         }
+
         .family-card {
             overflow-wrap: anywhere;
         }
+
         @supports (min-height: 90svh) {
             #home {
                 min-height: 90svh;
             }
-            #envelopeOverlay > div {
+
+            #envelopeOverlay>div {
                 max-height: calc(100svh - 2rem);
             }
         }
+
         @media (max-height: 520px) {
             #envelopeOverlay {
                 align-items: flex-start;
             }
-            #envelopeOverlay > div {
+
+            #envelopeOverlay>div {
                 margin-block: auto;
             }
         }
+
         @media (max-width: 380px) {
-            #envelopeOverlay > div {
+            #envelopeOverlay>div {
                 padding: 1.25rem;
             }
         }
+
         @media (hover: none) {
             #audioTooltip {
                 display: none;
             }
         }
+
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
             }
+
             *,
             *::before,
             *::after {
@@ -165,51 +203,62 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+
             .blessing-glow {
                 animation: none;
             }
+
             #scratchCanvas {
                 transition: none;
             }
         }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #F3E5D0;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #C6A15B;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #580E20;
         }
     </style>
 </head>
+
 <body class="bg-parchment antialiased relative selection:bg-gold selection:text-maroon">
 
     <!-- Background Audio Element -->
     <audio id="weddingAudio" loop preload="auto">
-        <source src="assets/wedding-audio.mp3" type="audio/mpeg">
+        <source src="assets/wedding-audio.mpeg" type="audio/mpeg">
     </audio>
 
     <!-- Sticky Floating Audio Player (Bottom Right) -->
     <div id="audioPlayer" class="fixed z-50 flex items-center">
-        <div id="audioTooltip" class="mr-3 px-3 py-1 bg-maroon text-soft-gold text-xs font-cinzel rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none border border-gold/40">
+        <div id="audioTooltip"
+            class="mr-3 px-3 py-1 bg-maroon text-soft-gold text-xs font-cinzel rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none border border-gold/40">
             Play Wedding Melody
         </div>
-        <button id="audioToggleBtn" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-maroon text-soft-gold border-2 border-gold flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 relative group focus:outline-none">
+        <button id="audioToggleBtn" onclick="toggleAudio()"
+            class="w-12 h-12 rounded-full bg-maroon text-soft-gold border-2 border-gold flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 relative group focus:outline-none">
             <span class="absolute inset-0 rounded-full border border-gold animate-ping opacity-75"></span>
             <i id="audioIcon" data-lucide="music-2" class="w-5 h-5 transition-transform group-hover:rotate-12"></i>
         </button>
     </div>
 
     <!-- 1. ENVELOPE OPENING MODAL / OVERLAY -->
-    <div id="envelopeOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#25130A]/90 backdrop-blur-md transition-all duration-700 p-4">
-        <div class="relative w-full max-w-md bg-[#FFF8EC] rounded-xl gold-border gold-box-shadow p-5 sm:p-8 text-center overflow-hidden transform transition-all duration-700">
-            
+    <div id="envelopeOverlay"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[#25130A]/90 backdrop-blur-md transition-all duration-700 p-4">
+        <div
+            class="relative w-full max-w-md bg-[#FFF8EC] rounded-xl gold-border gold-box-shadow p-5 sm:p-8 text-center overflow-hidden transform transition-all duration-700">
+
             <!-- Decorative Corners -->
             <div class="absolute top-2 left-2 w-8 h-8 border-t-2 border-l-2 border-gold pointer-events-none"></div>
             <div class="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-gold pointer-events-none"></div>
@@ -225,16 +274,19 @@
 
             <p class="font-cinzel text-xs tracking-[0.25em] text-burgundy uppercase mb-1">Royal Wedding Invitation</p>
             <h2 class="font-script text-4xl text-maroon mb-2">Saba & Arbaz</h2>
-            
+
             <p class="font-cormorant italic text-sm text-dark-brown mb-6">
-                "You're Cordially Invited to Celebrate Our Nikah"
+                "You're Cordially Invited to grace our Nikah Ceremony with your esteemed presence"
             </p>
 
             <!-- Wax Seal Button -->
             <div class="my-6 relative flex justify-center items-center">
-                <button onclick="openInvitation()" class="group relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-maroon border-2 border-gold flex flex-col items-center justify-center text-soft-gold shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none">
-                    <div class="absolute inset-1 rounded-full border border-gold/40 border-dashed animate-spin" style="animation-duration: 15s;"></div>
-                    <i data-lucide="heart" class="w-7 h-7 text-gold mb-1 group-hover:scale-125 transition-transform"></i>
+                <button onclick="openInvitation()"
+                    class="group relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-maroon border-2 border-gold flex flex-col items-center justify-center text-soft-gold shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none">
+                    <div class="absolute inset-1 rounded-full border border-gold/40 border-dashed animate-spin"
+                        style="animation-duration: 15s;"></div>
+                    <i data-lucide="heart"
+                        class="w-7 h-7 text-gold mb-1 group-hover:scale-125 transition-transform"></i>
                     <span class="font-cinzel text-[9px] tracking-widest uppercase">Open</span>
                 </button>
             </div>
@@ -258,82 +310,100 @@
             </nav>
 
             <div class="flex items-center space-x-3">
-                <button onclick="resetEnvelope()" class="hidden sm:flex items-center space-x-1 px-3 py-1.5 rounded-full border border-gold/50 text-[10px] font-cinzel text-soft-gold hover:bg-gold/10 transition-colors">
+                <button onclick="resetEnvelope()"
+                    class="hidden sm:flex items-center space-x-1 px-3 py-1.5 rounded-full border border-gold/50 text-[10px] font-cinzel text-soft-gold hover:bg-gold/10 transition-colors">
                     <i data-lucide="mail" class="w-3.5 h-3.5"></i>
                     <span>Re-open Envelope</span>
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="lg:hidden min-h-11 min-w-11 p-2 text-soft-gold hover:text-white focus:outline-none">
+                <button onclick="toggleMobileMenu()"
+                    class="lg:hidden min-h-11 min-w-11 p-2 text-soft-gold hover:text-white focus:outline-none">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobileMenu" class="hidden lg:hidden bg-maroon border-b border-gold/30 px-4 pt-2 pb-4 space-y-2 font-cinzel text-xs tracking-widest text-center">
+        <div id="mobileMenu"
+            class="hidden lg:hidden bg-maroon border-b border-gold/30 px-4 pt-2 pb-4 space-y-2 font-cinzel text-xs tracking-widest text-center">
             <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">HOME</a>
-            <a href="#family" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">OUR FAMILIES</a>
-            <a href="#blessing" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">BLESSING</a>
-            <a href="#details" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">EVENT DETAILS</a>
-            <a href="#location" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">LOCATION</a>
+            <a href="#family" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">OUR
+                FAMILIES</a>
+            <a href="#blessing" onclick="toggleMobileMenu()"
+                class="block py-2 text-soft-gold hover:text-white">BLESSING</a>
+            <a href="#details" onclick="toggleMobileMenu()" class="block py-2 text-soft-gold hover:text-white">EVENT
+                DETAILS</a>
+            <a href="#location" onclick="toggleMobileMenu()"
+                class="block py-2 text-soft-gold hover:text-white">LOCATION</a>
         </div>
     </header>
 
     <!-- 3. HERO SECTION (Using User's Card Template with Exact Text Overlay) -->
     <section id="home" class="relative min-h-[90vh] flex items-center justify-center py-8 px-4 sm:px-6">
-        <div class="hero-card-frame relative w-full max-w-[500px] aspect-[1000/1450] rounded-xl overflow-hidden gold-box-shadow gold-border bg-[#FFF8EC]">
-            
+        <div
+            class="hero-card-frame relative w-full max-w-[500px] aspect-[1000/1450] rounded-xl overflow-hidden gold-box-shadow gold-border bg-[#FFF8EC]">
+
             <!-- Card Image Background -->
-            <img src="assets/hero-card.jpg" alt="Royal Muslim Wedding Invitation" class="absolute inset-0 w-full h-full object-cover">
-            
+            <img src="assets/hero-card.jpg" alt="Royal Muslim Wedding Invitation"
+                class="absolute inset-0 w-full h-full object-cover">
+
             <!-- Dark Warm Tint for Readability -->
             <div class="absolute inset-0 bg-[#F3E5D0]/20 backdrop-brightness-105 pointer-events-none"></div>
 
             <!-- Overlay Content Inside the Arch -->
-            <div class="hero-card-overlay relative z-10 flex h-full flex-col items-center justify-start pt-8 pb-6 px-3 text-center sm:px-6 sm:pt-14 sm:pb-12">
-                
-                <!-- Top Section: Calligraphy & Header -->
-                <!-- Top Section: Calligraphy & Header -->
-<div class="hero-card-heading space-y-1.5 mt-6 sm:mt-14 max-w-[80%]">
-    <!-- Decorative Small Golden Crest -->
-    <div class="w-6 h-6 mx-auto mb-0.5 rounded-full bg-[#580E20]/10 border border-[#C6A15B]/40 flex items-center justify-center text-[#580E20]">
-        <i data-lucide="sparkles" class="w-3 h-3 text-[#C6A15B]"></i>
-    </div>
+            <div
+                class="hero-card-overlay relative z-10 flex h-full flex-col items-center justify-start pt-8 pb-6 px-3 text-center sm:px-6 sm:pt-14 sm:pb-12">
 
-    <!-- Arabic Bismillah Calligraphy -->
-    <div class="font-bismillah text-lg sm:text-xl lg:text-2xl text-[#580E20] leading-normal font-semibold">
-        بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-    </div>
-    
-    <!-- English Translation -->
-    <p class="font-serif text-[8px] sm:text-[9.5px] tracking-[0.15em] uppercase text-[#75182B] font-medium leading-tight">
-       <strong> In the name of Allah, the Most Beneficent, <br>the Most Merciful.</strong> 
-    </p>
-</div>
+                <!-- Top Section: Calligraphy & Header -->
+                <!-- Top Section: Calligraphy & Header -->
+                <div class="hero-card-heading space-y-1.5 mt-6 sm:mt-14 max-w-[80%]">
+                    <!-- Decorative Small Golden Crest -->
+                    <div
+                        class="w-6 h-6 mx-auto mb-0.5 rounded-full bg-[#580E20]/10 border border-[#C6A15B]/40 flex items-center justify-center text-[#580E20]">
+                        <i data-lucide="sparkles" class="w-3 h-3 text-[#C6A15B]"></i>
+                    </div>
+
+                    <!-- Arabic Bismillah Calligraphy -->
+                    <div
+                        class="font-bismillah text-lg sm:text-xl lg:text-2xl text-[#580E20] leading-normal font-semibold">
+                        بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                    </div>
+
+                    <!-- English Translation -->
+                    <p
+                        class="font-serif text-[8px] sm:text-[9.5px] tracking-[0.15em] uppercase text-[#75182B] font-medium leading-tight">
+                        <strong> ​"Together with our families,<br> we cordially invite you to grace our <br> Nikah Ceremony."</strong>
+                    </p>
+                </div>
 
                 <!-- Middle Section: Main Bride & Groom Announcement -->
                 <div class="mt-4 sm:mt-6 py-1 max-w-[85%] space-y-1">
-                    <p class="font-cinzel text-[9px] sm:text-[11px] tracking-[0.2em] text-[#580E20] font-semibold uppercase">
+                    <p
+                        class="font-cinzel text-[9px] sm:text-[11px] tracking-[0.2em] text-[#580E20] font-semibold uppercase">
                         We Are Getting Married
                     </p>
-                    
+
                     <h1 class="font-script text-2xl sm:text-3xl lg:text-4xl text-[#580E20] leading-snug py-0.5">
-                        Saba <span class="font-serif text-xl sm:text-2xl text-[#C6A15B] italic font-normal">&amp;</span> Arbaz
+                        Saba <span class="font-serif text-xl sm:text-2xl text-[#C6A15B] italic font-normal">&amp;</span>
+                        Arbaz
                     </h1>
 
-                    <p class="font-cormorant text-[11px] sm:text-xs lg:text-sm italic text-[#382319] max-w-[240px] mx-auto leading-tight">
+                    <p
+                        class="font-cormorant text-[11px] sm:text-xs lg:text-sm italic text-[#382319] max-w-[240px] mx-auto leading-tight">
                         "Together with our families, we cordially invite you to celebrate our Nikah."
                     </p>
 
                     <!-- Date and scroll prompt directly follow the invitation -->
                     <div class="mt-2 space-y-1.5 z-20">
-                        <div class="inline-block px-3 py-0.5 rounded-full bg-[#580E20]/90 text-[#DCC18A] font-cinzel text-[9px] sm:text-[10px] tracking-widest border border-[#C6A15B]/50 shadow-md">
-                        THURSDAY, 12 NOVEMBER 2026
+                        <div
+                            class="inline-block px-3 py-0.5 rounded-full bg-[#580E20]/90 text-[#DCC18A] font-cinzel text-[9px] sm:text-[10px] tracking-widest border border-[#C6A15B]/50 shadow-md">
+                            THURSDAY, 12 NOVEMBER 2026
                         </div>
 
                         <div class="flex flex-col items-center pt-0.5 animate-bounce opacity-80">
-                            <span class="font-serif text-[8px] uppercase tracking-widest text-[#75182B] font-medium"> <strong>Scroll to Explore</strong></span>
+                            <span class="font-serif text-[8px] uppercase tracking-widest text-[#75182B] font-medium">
+                                <strong>Scroll to Explore</strong></span>
                             <i data-lucide="chevron-down" class="w-3 h-3 text-[#580E20] -mt-0.5"></i>
                         </div>
                     </div>
@@ -345,8 +415,9 @@
 
     <!-- 4. FAMILY INVITATION SECTION -->
     <section id="family" class="py-16 px-4 sm:px-6 max-w-4xl mx-auto">
-        <div class="family-card bg-[#FFF8EC] rounded-2xl gold-border gold-box-shadow p-4 sm:p-8 lg:p-12 relative overflow-hidden text-center">
-            
+        <div
+            class="family-card bg-[#FFF8EC] rounded-2xl gold-border gold-box-shadow p-4 sm:p-8 lg:p-12 relative overflow-hidden text-center">
+
             <!-- Decorative Border Frame -->
             <div class="absolute inset-3 border border-gold/30 pointer-events-none rounded-xl"></div>
 
@@ -354,9 +425,9 @@
             <div class="font-bismillah text-2xl sm:text-3xl text-maroon mb-2">
                 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
             </div>
-            <p class="font-serif text-xs tracking-[0.2em] uppercase text-burgundy mb-4">
-                In the name of Allah, the Most Beneficent, the Most Merciful
-            </p>
+            <!-- <p class="font-serif text-xs tracking-[0.2em] uppercase text-burgundy mb-4">
+                In the name of Allah, the Most Beneficent, the Most Merciful !!!!!!!
+            </p> -->
 
             <h3 class="font-cinzel text-base sm:text-lg font-bold text-maroon tracking-wider mb-6">
                 Assalamualaikum Warahmatullahi Wabarakatuh
@@ -375,41 +446,186 @@
                 <div class="space-y-1">
                     <p class="font-serif text-lg font-bold text-mar0on">Late Mr. Haji Gulab Ladji Shaikh (Dada)</p>
                     <p class="text-xs text-gold">&amp;</p>
-                    <p class="font-serif text-lg font-bold text-maroon">Mrs. Hajjan Shanurbi Haji Gulab Shaikh (Dadi)</p>
+                    <p class="font-serif text-lg font-bold text-maroon">Mrs. Hajjan Shanurbi Haji Gulab Shaikh (Dadi)
+                    </p>
                 </div>
 
                 <div class="py-2 space-y-1">
                     <p class="font-serif text-lg font-bold text-maroon">Mrs. Zeba &amp; Mr. Dr. Aasif Gulab Shaikh</p>
                     <p class="text-xs text-gold">&amp;</p>
-                    <p class="font-serif text-lg font-bold text-maroon">Mrs. Jarinabi &amp; Mr. Mustak Haji Gulab Shaikh</p>
+                    <p class="font-serif text-lg font-bold text-maroon">Mrs. Jarinabi &amp; Mr. Mustak Haji Gulab Shaikh
+                    </p>
                 </div>
 
                 <p class="text-sm italic px-4">
                     Cordially invites your esteemed presence on the auspicious occasion of the <br>
-                    <span class="font-cinzel font-bold text-maroon text-base not-italic tracking-wider">'Nikah Ceremony'</span> of their Beloved Daughter
+                    <span class="font-cinzel font-bold text-maroon text-base not-italic tracking-wider">'Nikah
+                        Ceremony'</span> of their Beloved Daughter
                 </p>
 
-                <div class="py-4">
-                    <h2 class="font-script text-4xl sm:text-5xl text-maroon mb-1">Saba</h2>
+                <!-- <div class="py-4">
+                    <h2 class="font-script text-4xl sm:text-5xl text-maroon mb-1">Saba </h2>
+                    <h2 class="font-script text-4xl sm:text-5xl text-maroon mb-1"> "Daughter of Mr. & Mrs. Mustak Haji Gulab Shaikh" </h2>
                     <span class="font-serif text-xl text-gold italic">&amp;</span>
                     <h2 class="font-script text-4xl sm:text-5xl text-maroon mt-1">Arbaz</h2>
+                     <h2 class="font-script text-4xl sm:text-5xl text-maroon mt-1">"Son of Late Mr. & Mrs. Ali Janab Tauhid Shaikh"</h2>
+                </div> -->
+
+                <div style="
+    width: 100%;
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 25px 15px;
+    text-align: center;
+    box-sizing: border-box;
+">
+
+                    <!-- Bride Section -->
+                    <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 25px;
+    ">
+
+                        <h2 style="
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(65px, 10vw, 100px);
+            font-weight: 400;
+            color: #641629;
+            line-height: 1.15;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        ">
+                            Saba
+                        </h2>
+
+                        <div style="
+            width: 55px;
+            height: 2px;
+            background: #c6a15b;
+            margin: 8px auto 12px;
+        "></div>
+
+                        <p style="
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(17px, 2.5vw, 22px);
+            font-weight: 500;
+            font-style: italic;
+            color: #795d49;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 10px;
+            background: transparent;
+        ">
+                            Daughter of Mr. &amp; Mrs. Mustak Haji Gulab Shaikh
+                        </p>
+
+                    </div>
+
+
+                    <!-- Decorative Ampersand -->
+                    <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px auto;
+    ">
+
+                        <div style="
+            width: 65px;
+            max-width: 15%;
+            height: 1px;
+            background: #c6a15b;
+        "></div>
+
+                        <span style="
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            font-weight: 400;
+            color: #c6a15b;
+            line-height: 1;
+        ">
+                            &amp;
+                        </span>
+
+                        <div style="
+            width: 65px;
+            max-width: 15%;
+            height: 1px;
+            background: #c6a15b;
+        "></div>
+
+                    </div>
+
+
+                    <!-- Groom Section -->
+                    <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 25px;
+    ">
+
+                        <h2 style="
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(65px, 10vw, 100px);
+            font-weight: 400;
+            color: #641629;
+            line-height: 1.15;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        ">
+                            Arbaz
+                        </h2>
+
+                        <div style="
+            width: 55px;
+            height: 2px;
+            background: #c6a15b;
+            margin: 8px auto 12px;
+        "></div>
+
+                        <p style="
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(17px, 2.5vw, 22px);
+            font-weight: 500;
+            font-style: italic;
+            color: #795d49;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 10px;
+            background: transparent;
+        ">
+                            Son of Late Mr. &amp; Mrs. Ali Janab Tauhid Shaikh
+                        </p>
+
+                    </div>
+
                 </div>
 
                 <div class="pt-6 border-t border-gold/30">
                     <p class="font-cinzel text-xs tracking-[0.2em] text-maroon font-bold uppercase mb-4">
                         WITH BEST COMPLIMENTS FROM
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-serif text-dark-brown text-left max-w-2xl mx-auto bg-champagne/40 p-4 sm:p-6 rounded-xl border border-gold/30">
-                        <p>• Mrs. &amp; Mr. Mustak Haji Gulab Shaikh</p>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-serif text-dark-brown text-left max-w-2xl mx-auto bg-champagne/40 p-4 sm:p-6 rounded-xl border border-gold/30">
                         <p>• Mrs. &amp; Mr. Nawab Haji Gulab Shaikh</p>
                         <p>• Mrs. &amp; Mr. Haji Faiz Ahmed Haji Gulab Shaikh</p>
                         <p>• Mrs. &amp; Mr. Nazir Haji Gulab Shaikh</p>
+                        <p>• Mrs. &amp; Mr. Mustak Haji Gulab Shaikh</p>
                         <p>• Mrs. &amp; Mr. Iqbal Haji Gulab Shaikh</p>
-                        <p>• Mrs. &amp; Mr. Dr. Haji Aasif Haji Gulab Shaikh</p>
+                        <p>• Mrs. &amp; Mr. Dr. Aasif Haji Gulab Shaikh</p>
                         <p>• Mrs. &amp; Mr. Azim Haji Gulab Shaikh</p>
                         <p>• Mst. Zaid Mustak Shaikh</p>
                         <p class="sm:col-span-2">• Mrs. &amp; Mr. Dr. Aakif Tanveer Shaikh (Kalyan)</p>
-                        <p class="sm:col-span-2 text-center font-semibold text-maroon pt-2 font-cinzel text-xs tracking-wider">
+                        <p
+                            class="sm:col-span-2 text-center font-semibold text-maroon pt-2 font-cinzel text-xs tracking-wider">
                             &amp; All Cousins, Brother's, Sister's, Shaikh Family, Relatives &amp; Friends
                         </p>
                     </div>
@@ -419,19 +635,26 @@
     </section>
 
     <!-- 5. INTERACTIVE SCRATCH-TO-REVEAL SECTION -->
-    <section id="blessing" class="px-4 py-16 sm:px-6 sm:py-20">
-        <div class="blessing-card gold-box-shadow relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border border-gold/60 px-5 py-10 text-center sm:px-10 sm:py-14">
+    <!-- <section id="blessing" class="px-4 py-16 sm:px-6 sm:py-20">
+        <div
+            class="blessing-card gold-box-shadow relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border border-gold/60 px-5 py-10 text-center sm:px-10 sm:py-14">
             <div class="pointer-events-none absolute inset-3 rounded-[1.5rem] border border-gold/25"></div>
-            <div class="blessing-glow pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-gold/20 blur-3xl"></div>
-            <div class="blessing-glow pointer-events-none absolute -bottom-28 -right-16 h-64 w-64 rounded-full bg-burgundy/10 blur-3xl" style="animation-delay: 1.5s;"></div>
+            <div
+                class="blessing-glow pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-gold/20 blur-3xl">
+            </div>
+            <div class="blessing-glow pointer-events-none absolute -bottom-28 -right-16 h-64 w-64 rounded-full bg-burgundy/10 blur-3xl"
+                style="animation-delay: 1.5s;"></div>
 
             <div class="relative z-10 mx-auto max-w-2xl">
-                <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/60 px-4 py-1.5 font-cinzel text-[10px] font-semibold uppercase tracking-[0.24em] text-burgundy shadow-sm sm:text-xs">
+                <div
+                    class="mb-3 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/60 px-4 py-1.5 font-cinzel text-[10px] font-semibold uppercase tracking-[0.24em] text-burgundy shadow-sm sm:text-xs">
                     <i data-lucide="sparkles" class="h-3.5 w-3.5 text-gold"></i>
                     A little blessing for you
                 </div>
-                <h3 class="font-cinzel text-3xl font-semibold leading-tight text-maroon sm:text-4xl">A Message from the Heart</h3>
-                <p class="mx-auto mt-3 max-w-lg font-cormorant text-base italic leading-relaxed text-dark-brown/80 sm:text-lg">
+                <h3 class="font-cinzel text-3xl font-semibold leading-tight text-maroon sm:text-4xl">A Message from the
+                    Heart</h3>
+                <p
+                    class="mx-auto mt-3 max-w-lg font-cormorant text-base italic leading-relaxed text-dark-brown/80 sm:text-lg">
                     A small moment of joy, lovingly saved for our family and friends.
                 </p>
 
@@ -441,39 +664,59 @@
                     <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gold/70"></span>
                 </div>
 
-                <div class="relative mx-auto max-w-xl rounded-2xl bg-gradient-to-br from-maroon via-[#681326] to-[#3D0714] p-1 shadow-[0_20px_50px_-20px_rgba(61,7,20,0.65)]">
+                <div
+                    class="relative mx-auto max-w-xl rounded-2xl bg-gradient-to-br from-maroon via-[#681326] to-[#3D0714] p-1 shadow-[0_20px_50px_-20px_rgba(61,7,20,0.65)]">
                     <div class="pointer-events-none absolute -inset-2 rounded-[1.25rem] border border-gold/25"></div>
-                    <div class="relative min-h-56 overflow-hidden rounded-[0.9rem] border border-soft-gold/50 sm:min-h-64">
-                        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(220,193,138,0.2),transparent_65%)]"></div>
-                        <div class="pointer-events-none absolute left-3 top-3 h-6 w-6 rounded-tl-lg border-l border-t border-soft-gold/60"></div>
-                        <div class="pointer-events-none absolute right-3 top-3 h-6 w-6 rounded-tr-lg border-r border-t border-soft-gold/60"></div>
-                        <div class="pointer-events-none absolute bottom-3 left-3 h-6 w-6 rounded-bl-lg border-b border-l border-soft-gold/60"></div>
-                        <div class="pointer-events-none absolute bottom-3 right-3 h-6 w-6 rounded-br-lg border-b border-r border-soft-gold/60"></div>
-
-                        <div id="scratchContent" class="relative z-0 flex min-h-56 flex-col items-center justify-center px-7 py-8 text-center sm:min-h-64 sm:px-12">
-                            <div class="mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-gold/50 bg-gold/10 text-soft-gold shadow-[0_0_30px_rgba(198,161,91,0.15)]">
-                                <i data-lucide="heart-handshake" class="h-6 w-6"></i>
-                            </div>
-                            <p class="font-cinzel text-[10px] uppercase tracking-[0.28em] text-soft-gold/80">With love &amp; duas</p>
-                            <h4 class="mt-2 font-script text-4xl text-ivory sm:text-5xl">You're Invited!</h4>
-                            <p class="mt-3 max-w-sm font-cormorant text-lg italic leading-relaxed text-champagne sm:text-xl">
-                                "Your presence and prayers will make our special day truly complete."
-                            </p>
-                            <p class="mt-4 font-cinzel text-[9px] uppercase tracking-[0.2em] text-soft-gold/75">Saba &amp; Arbaz</p>
+                    <div
+                        class="relative min-h-56 overflow-hidden rounded-[0.9rem] border border-soft-gold/50 sm:min-h-64">
+                        <div
+                            class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(220,193,138,0.2),transparent_65%)]">
+                        </div>
+                        <div
+                            class="pointer-events-none absolute left-3 top-3 h-6 w-6 rounded-tl-lg border-l border-t border-soft-gold/60">
+                        </div>
+                        <div
+                            class="pointer-events-none absolute right-3 top-3 h-6 w-6 rounded-tr-lg border-r border-t border-soft-gold/60">
+                        </div>
+                        <div
+                            class="pointer-events-none absolute bottom-3 left-3 h-6 w-6 rounded-bl-lg border-b border-l border-soft-gold/60">
+                        </div>
+                        <div
+                            class="pointer-events-none absolute bottom-3 right-3 h-6 w-6 rounded-br-lg border-b border-r border-soft-gold/60">
                         </div>
 
-                        <canvas id="scratchCanvas" aria-label="Scratch the gold cover to reveal a wedding blessing" class="absolute inset-0 z-10 h-full w-full cursor-crosshair"></canvas>
+                        <div id="scratchContent"
+                            class="relative z-0 flex min-h-56 flex-col items-center justify-center px-7 py-8 text-center sm:min-h-64 sm:px-12">
+                            <div
+                                class="mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-gold/50 bg-gold/10 text-soft-gold shadow-[0_0_30px_rgba(198,161,91,0.15)]">
+                                <i data-lucide="heart-handshake" class="h-6 w-6"></i>
+                            </div>
+                            <p class="font-cinzel text-[10px] uppercase tracking-[0.28em] text-soft-gold/80">With love
+                                &amp; duas</p>
+                            <h4 class="mt-2 font-script text-4xl text-ivory sm:text-5xl">You're Invited!</h4>
+                            <p
+                                class="mt-3 max-w-sm font-cormorant text-lg italic leading-relaxed text-champagne sm:text-xl">
+                                "Your presence and prayers will make our special day truly complete."
+                            </p>
+                            <p class="mt-4 font-cinzel text-[9px] uppercase tracking-[0.2em] text-soft-gold/75">Saba
+                                &amp; Arbaz</p>
+                        </div>
+
+                        <canvas id="scratchCanvas" aria-label="Scratch the gold cover to reveal a wedding blessing"
+                            class="absolute inset-0 z-10 h-full w-full cursor-crosshair"></canvas>
                     </div>
                 </div>
 
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- 6. WEDDING INVITATION DETAILS & COUNTDOWN -->
     <section id="details" class="py-16 px-4 sm:px-6 max-w-4xl mx-auto">
-        <div class="bg-[#FFF8EC] rounded-2xl gold-border gold-box-shadow p-5 sm:p-8 lg:p-12 text-center relative overflow-hidden">
-            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-maroon tracking-widest mb-2">Counting Down to Forever</h3>
+        <div
+            class="bg-[#FFF8EC] rounded-2xl gold-border gold-box-shadow p-5 sm:p-8 lg:p-12 text-center relative overflow-hidden">
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-maroon tracking-widest mb-2">Counting Down to
+                Forever</h3>
             <p class="font-cormorant italic text-sm text-dark-brown mb-8">Thursday, 12 November 2026</p>
 
             <!-- Live Countdown Timer Cards -->
@@ -497,8 +740,10 @@
             </div>
 
             <!-- Venue Info Box -->
-            <div id="location" class="max-w-xl mx-auto bg-champagne/50 p-4 sm:p-6 lg:p-8 rounded-xl border border-gold/40 text-center space-y-4 shadow-sm">
-                <div class="w-12 h-12 mx-auto rounded-full bg-maroon text-soft-gold flex items-center justify-center border border-gold">
+            <div id="location"
+                class="max-w-xl mx-auto bg-champagne/50 p-4 sm:p-6 lg:p-8 rounded-xl border border-gold/40 text-center space-y-4 shadow-sm">
+                <div
+                    class="w-12 h-12 mx-auto rounded-full bg-maroon text-soft-gold flex items-center justify-center border border-gold">
                     <i data-lucide="map-pin" class="w-6 h-6"></i>
                 </div>
                 <h4 class="font-cinzel text-lg font-bold text-maroon tracking-wider">Venue Location</h4>
@@ -508,7 +753,9 @@
                     Mira Road East, Thane - 401107
                 </p>
                 <div class="pt-2 flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://maps.google.com/?q=Medtiya+Ground+Bhayander+Flyover+Lodha+Road+Mira+Road+East+Thane" target="_blank" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-maroon text-soft-gold font-cinzel text-xs tracking-widest hover:bg-burgundy transition-colors shadow-lg border border-gold/40">
+                    <a href="https://maps.google.com/?q=Medtiya+Ground+Bhayander+Flyover+Lodha+Road+Mira+Road+East+Thane"
+                        target="_blank"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-maroon text-soft-gold font-cinzel text-xs tracking-widest hover:bg-burgundy transition-colors shadow-lg border border-gold/40">
                         <i data-lucide="navigation" class="w-4 h-4 mr-2"></i>
                         GET DIRECTIONS
                     </a>
@@ -518,9 +765,11 @@
     </section>
 
     <!-- 7. CLOSING SECTION -->
-    <section class="py-14 sm:py-20 px-4 sm:px-6 bg-maroon text-ivory text-center relative overflow-hidden border-t border-gold/40">
+    <section
+        class="py-14 sm:py-20 px-4 sm:px-6 bg-maroon text-ivory text-center relative overflow-hidden border-t border-gold/40">
         <div class="max-w-2xl mx-auto space-y-6 relative z-10">
-            <div class="w-12 h-12 mx-auto rounded-full bg-gold/20 border border-gold flex items-center justify-center text-soft-gold">
+            <div
+                class="w-12 h-12 mx-auto rounded-full bg-gold/20 border border-gold flex items-center justify-center text-soft-gold">
                 <i data-lucide="sparkles" class="w-6 h-6"></i>
             </div>
             <h3 class="font-cinzel text-2xl sm:text-3xl text-soft-gold tracking-widest">You're Invited!</h3>
@@ -534,7 +783,7 @@
         </div>
     </section>
 
-    
+
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
@@ -755,4 +1004,5 @@
 
     </script>
 </body>
+
 </html>
